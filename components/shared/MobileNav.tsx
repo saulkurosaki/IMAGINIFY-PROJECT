@@ -25,6 +25,28 @@ const MobileNav = () => {
       <nav className="flex gap-2">
         <SignedIn>
           <UserButton afterSignOutUrl="/" />
+
+          <Sheet>
+            <SheetTrigger>
+              <Image
+                src="/assets/icons/menu.svg"
+                alt="menu"
+                width={32}
+                height={32}
+                className="cursor-pointer"
+              />
+            </SheetTrigger>
+            <SheetContent className="sheet-content sm:w-64">
+              <>
+                <Image
+                  src="/assets/images/logo-text.svg"
+                  alt="logo"
+                  width={152}
+                  height={23}
+                />
+              </>
+            </SheetContent>
+          </Sheet>
         </SignedIn>
       </nav>
     </header>
