@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Schema, model, models } from "mongoose";
 
 const ImageSchema = new Schema({
   title: { type: String, require: true },
@@ -16,3 +16,7 @@ const ImageSchema = new Schema({
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
+
+const Image = models?.Image || model("Image", ImageSchema);
+
+export default Image;
