@@ -1,9 +1,10 @@
-import React from "react";
-import { useToast } from "../ui/use-toast";
-import { CldImage, CldUploadWidget } from "next-cloudinary";
-import Image from "next/image";
+"use client";
+
+import { useToast } from "@/components/ui/use-toast";
 import { dataUrl, getImageSize } from "@/lib/utils";
+import { CldImage, CldUploadWidget } from "next-cloudinary";
 import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
+import Image from "next/image";
 
 type MediaUploaderProps = {
   onValueChange: (value: string) => void;
@@ -23,6 +24,16 @@ const MediaUploader = ({
   const { toast } = useToast();
 
   const onUploadSuccessHandler = (result: any) => {
+    setImage((prevState: any) => ({
+      ...prevState,
+      publicId: result?.info?.public_id,
+      width: result?.info?.width,
+      height: result?.info?.height,
+      secureURL: result?.info?.secure_url,
+    }));
+
+    onValueChange(result?.info?.public_id);
+
     toast({
       title: "Image uploaded successfully",
       description: "1 credit was deducted from your account",
@@ -33,7 +44,7 @@ const MediaUploader = ({
 
   const onUploadErrorHandler = () => {
     toast({
-      title: "Something went wrong...",
+      title: "Something went wrong while uploading",
       description: "Please try again",
       duration: 5000,
       className: "error-toast",
@@ -42,7 +53,7 @@ const MediaUploader = ({
 
   return (
     <CldUploadWidget
-      uploadPreset="saul_imginify"
+      uploadPreset="saul_imaginify"
       options={{
         multiple: false,
         resourceType: "image",
@@ -73,7 +84,7 @@ const MediaUploader = ({
               <div className="media-uploader_cta-image">
                 <Image
                   src="/assets/icons/add.svg"
-                  alt="Add image"
+                  alt="Add Image"
                   width={24}
                   height={24}
                 />
