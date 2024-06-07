@@ -5,7 +5,15 @@ const MediaUploader = ({}) => {
   const { toast } = useToast();
 
   const onUploadSuccessHandler = (result: any) => {};
-  const onUploadErrorHandler = () => {};
+
+  const onUploadErrorHandler = () => {
+    toast({
+      title: "Something went wrong...",
+      description: "Please try again",
+      duration: 5000,
+      className: "error-toast",
+    });
+  };
 
   return (
     <CldUploadWidget
