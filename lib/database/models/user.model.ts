@@ -5,8 +5,8 @@ export interface IUser {
   email: string;
   username: string;
   photo: string;
-  firstName?: string;
-  lastName?: string;
+  firstName?: string | undefined | null;
+  lastName?: string | undefined | null;
   planId?: number;
   creditBalance?: number;
 }
