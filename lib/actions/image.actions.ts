@@ -66,17 +66,17 @@ export async function updateImage({ image, userId, path }: UpdateImageParams) {
 }
 
 // DELETE IMAGE
-// export async function deleteImage(imageId: string) {
-//   try {
-//     await connectToDatabase();
+export async function deleteImage(imageId: string) {
+  try {
+    await connectToDatabase();
 
-//     await Image.findByIdAndDelete(imageId);
-//   } catch (error) {
-//     handleError(error)
-//   } finally{
-//     redirect('/')
-//   }
-// }
+    await Image.findByIdAndDelete(imageId);
+  } catch (error) {
+    handleError(error);
+  } finally {
+    redirect("/");
+  }
+}
 
 // GET IMAGE
 // export async function getImageById(imageId: string) {
