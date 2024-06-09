@@ -17,28 +17,28 @@ const populateUser = (query: any) =>
   });
 
 // ADD IMAGE
-// export async function addImage({ image, userId, path }: AddImageParams) {
-//   try {
-//     await connectToDatabase();
+export async function addImage({ image, userId, path }: AddImageParams) {
+  try {
+    await connectToDatabase();
 
-//     const author = await User.findById(userId);
+    const author = await User.findById(userId);
 
-//     if (!author) {
-//       throw new Error("User not found");
-//     }
+    if (!author) {
+      throw new Error("User not found");
+    }
 
-//     const newImage = await Image.create({
-//       ...image,
-//       author: author._id,
-//     })
+    const newImage = await Image.create({
+      ...image,
+      author: author._id,
+    });
 
-//     revalidatePath(path);
+    revalidatePath(path);
 
-//     return JSON.parse(JSON.stringify(newImage));
-//   } catch (error) {
-//     handleError(error)
-//   }
-// }
+    return JSON.parse(JSON.stringify(newImage));
+  } catch (error) {
+    handleError(error);
+  }
+}
 
 // UPDATE IMAGE
 // export async function updateImage({ image, userId, path }: UpdateImageParams) {
