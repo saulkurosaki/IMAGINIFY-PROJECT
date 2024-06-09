@@ -79,19 +79,19 @@ export async function deleteImage(imageId: string) {
 }
 
 // GET IMAGE
-// export async function getImageById(imageId: string) {
-//   try {
-//     await connectToDatabase();
+export async function getImageById(imageId: string) {
+  try {
+    await connectToDatabase();
 
-//     const image = await populateUser(Image.findById(imageId));
+    const image = await populateUser(Image.findById(imageId));
 
-//     if(!image) throw new Error("Image not found");
+    if (!image) throw new Error("Image not found");
 
-//     return JSON.parse(JSON.stringify(image));
-//   } catch (error) {
-//     handleError(error)
-//   }
-// }
+    return JSON.parse(JSON.stringify(image));
+  } catch (error) {
+    handleError(error);
+  }
+}
 
 // GET IMAGES
 // export async function getAllImages({ limit = 9, page = 1, searchQuery = '' }: {
