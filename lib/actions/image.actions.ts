@@ -41,29 +41,29 @@ export async function addImage({ image, userId, path }: AddImageParams) {
 }
 
 // UPDATE IMAGE
-// export async function updateImage({ image, userId, path }: UpdateImageParams) {
-//   try {
-//     await connectToDatabase();
+export async function updateImage({ image, userId, path }: UpdateImageParams) {
+  try {
+    await connectToDatabase();
 
-//     const imageToUpdate = await Image.findById(image._id);
+    const imageToUpdate = await Image.findById(image._id);
 
-//     if (!imageToUpdate || imageToUpdate.author.toHexString() !== userId) {
-//       throw new Error("Unauthorized or image not found");
-//     }
+    if (!imageToUpdate || imageToUpdate.author.toHexString() !== userId) {
+      throw new Error("Unauthorized or image not found");
+    }
 
-//     const updatedImage = await Image.findByIdAndUpdate(
-//       imageToUpdate._id,
-//       image,
-//       { new: true }
-//     )
+    const updatedImage = await Image.findByIdAndUpdate(
+      imageToUpdate._id,
+      image,
+      { new: true }
+    );
 
-//     revalidatePath(path);
+    revalidatePath(path);
 
-//     return JSON.parse(JSON.stringify(updatedImage));
-//   } catch (error) {
-//     handleError(error)
-//   }
-// }
+    return JSON.parse(JSON.stringify(updatedImage));
+  } catch (error) {
+    handleError(error);
+  }
+}
 
 // DELETE IMAGE
 // export async function deleteImage(imageId: string) {
