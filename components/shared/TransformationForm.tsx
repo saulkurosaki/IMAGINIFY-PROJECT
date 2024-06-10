@@ -1,8 +1,17 @@
 "use client";
 
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -21,18 +30,11 @@ import {
   transformationTypes,
 } from "@/constants";
 import { CustomField } from "./CustomField";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useEffect, useState, useTransition } from "react";
 import { AspectRatioKey, debounce, deepMergeObjects } from "@/lib/utils";
-import { updateCredits } from "@/lib/actions/user.actions";
 import MediaUploader from "./MediaUploader";
 import TransformedImage from "./TransformedImage";
+import { updateCredits } from "@/lib/actions/user.actions";
 import { getCldImageUrl } from "next-cloudinary";
 import { addImage, updateImage } from "@/lib/actions/image.actions";
 import { useRouter } from "next/navigation";
@@ -55,9 +57,6 @@ const TransformationForm = ({
   config = null,
 }: TransformationFormProps) => {
   const transformationType = transformationTypes[type];
-
-  const router = useRouter();
-
   const [image, setImage] = useState(data);
   const [newTransformation, setNewTransformation] =
     useState<Transformations | null>(null);
@@ -65,6 +64,7 @@ const TransformationForm = ({
   const [isTransforming, setIsTransforming] = useState(false);
   const [transformationConfig, setTransformationConfig] = useState(config);
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const initialValues =
     data && action === "Update"
@@ -177,14 +177,14 @@ const TransformationForm = ({
     debounce(() => {
       setNewTransformation((prevState: any) => ({
         ...prevState,
-        [value]: {
+        [type]: {
           ...prevState?.[type],
           [fieldName === "prompt" ? "prompt" : "to"]: value,
         },
       }));
+    }, 1000)();
 
-      return onChangeField(value);
-    }, 1000);
+    return onChangeField(value);
   };
 
   const onTransformHandler = async () => {
@@ -276,7 +276,7 @@ const TransformationForm = ({
               <CustomField
                 control={form.control}
                 name="color"
-                formLabel="Replacement color"
+                formLabel="Replacement Color"
                 className="w-full"
                 render={({ field }) => (
                   <Input
@@ -330,9 +330,8 @@ const TransformationForm = ({
             disabled={isTransforming || newTransformation === null}
             onClick={onTransformHandler}
           >
-            {isTransforming ? "Transforming..." : "Apply transformation"}
+            {isTransforming ? "Transforming..." : "Apply Transformation"}
           </Button>
-
           <Button
             type="submit"
             className="submit-button capitalize"
