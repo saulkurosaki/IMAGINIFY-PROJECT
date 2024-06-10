@@ -3,6 +3,10 @@
 import { PUBLISHABLE_KEY } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import Stripe from "stripe";
+import { handleError } from "../utils";
+import { connectToDatabase } from "../database/mongoose";
+import Transaction from "../database/models/transaction.model";
+import { updateCredits } from "./user.actions";
 
 export const checkoutCredits = async (
   transaction: CheckoutTransactionParams
@@ -35,4 +39,25 @@ export const checkoutCredits = async (
   });
 
   redirect(session.url!);
+};
+
+export const createTransaction = async (
+  transaction: CreateTransactionParams
+) => {
+  try {
+    await connectToDatabase();
+
+    // Create a new transaction with a buyerId
+    const newTransaction = await Transaction.create({
+      ...transaction,
+      buyer: transaction.buyerId,
+    });
+
+    // Update buyer credits
+    await updateCredits(transaction.buyerId, transaction.credits);
+
+    return JSON.parse(JSON.stringify(newTransaction));
+  } catch (error) {
+    handleError(error);
+  }
 };
