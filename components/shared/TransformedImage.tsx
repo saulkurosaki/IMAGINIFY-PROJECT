@@ -74,9 +74,9 @@ const TransformedImage = ({
             <div className="transforming-loader">
               <Image
                 src="/assets/icons/spinner.svg"
-                alt="Transforming"
                 width={50}
                 height={50}
+                alt="spinner"
               />
               <p className="text-white/80">Please wait...</p>
             </div>

@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { navLinks } from "@/constants";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
@@ -58,14 +51,14 @@ const MobileNav = () => {
 
                     return (
                       <li
-                        key={link.route}
                         className={`${
                           isActive && "gradient-text"
                         } p-18 flex whitespace-nowrap text-dark-700`}
+                        key={link.route}
                       >
                         <Link
-                          href={link.route}
                           className="sidebar-link cursor-pointer"
+                          href={link.route}
                         >
                           <Image
                             src={link.icon}
@@ -86,7 +79,7 @@ const MobileNav = () => {
 
         <SignedOut>
           <Button asChild className="button bg-purple-gradient bg-cover">
-            <Link href="sign-in">Login</Link>
+            <Link href="/sign-in">Login</Link>
           </Button>
         </SignedOut>
       </nav>

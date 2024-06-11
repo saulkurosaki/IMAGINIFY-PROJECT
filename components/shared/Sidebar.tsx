@@ -37,7 +37,7 @@ const Sidebar = () => {
                         : "text-gray-700"
                     }`}
                   >
-                    <Link href={link.route} className="sidebar-link">
+                    <Link className="sidebar-link" href={link.route}>
                       <Image
                         src={link.icon}
                         alt="logo"
@@ -65,7 +65,7 @@ const Sidebar = () => {
                         : "text-gray-700"
                     }`}
                   >
-                    <Link href={link.route} className="sidebar-link">
+                    <Link className="sidebar-link" href={link.route}>
                       <Image
                         src={link.icon}
                         alt="logo"
@@ -87,7 +87,7 @@ const Sidebar = () => {
 
           <SignedOut>
             <Button asChild className="button bg-purple-gradient bg-cover">
-              <Link href="sign-in">Login</Link>
+              <Link href="/sign-in">Login</Link>
             </Button>
           </SignedOut>
         </nav>
