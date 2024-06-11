@@ -1,6 +1,5 @@
 "use server";
 
-import { PUBLISHABLE_KEY } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import Stripe from "stripe";
 import { handleError } from "../utils";
